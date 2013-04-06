@@ -1,0 +1,53 @@
+<% channel_init %>
+
+<div class="channel list">
+  <nav>
+    <ul>
+      <li class="<%= :current if params[:state].to_s.intern == :all %>"><%= link_to 'すべて', channels_path(:state=>:all) %></li
+     ><li class="<%= :current if params[:state].to_s.intern == :enabled %>"><%= link_to '有効', channels_path(:state=>:enabled) %></li
+     ><li class="<%= :current if params[:state].to_s.intern == :disabled %>"><%= link_to '無効', channels_path(:state=>:disabled) %></li>
+    </ul>
+  </nav>
+  
+  <ul class="list">
+  <% @channels.each do |channel| %>
+    <li class="<%= :current if @channel.id == channel.id %>"><a href="<%= channel_path(channel, :state=>params[:state]) %>">
+      <p class="name"><%= channel.name %></p>
+      <p class="no"><%=raw "<b>#{channel.no}</b>ch" unless channel.no.blank? %></p>
+    </a></li>
+  <% end %>
+  </ul>
+</div>
+
+<div class="channel detail">
+<%= form_for @channel do |f| %>
+  <div class="summary">
+    <h2><%= @channel.name %></h2>
+    <p class="no"><b><%= f.text_field :no %></b>ch</p>
+    <p class="enable"><%= f.check_box :enable %></p>
+    <nav><%= f.submit '保存' %></nav>
+  </div>
+  
+  <ul class="airtime-list">
+  <% @_airtime_groups.each do |day_name, airtimes| %>
+    <li class="divider"><%= link_to t(day_name), lineup_path(day_name) %></li>
+    
+    <% airtimes.each do |airtime| %>
+      <%= f.fields_for :airtimes, airtime do |af| %>
+        <li class="item" id="airtime_<%= airtime.id %>">
+          <p class="time"><%= link_to format_time(airtime.start_time), lineup_path(airtime.day_name)+"#airtime_#{airtime.id}" %></p
+         ><p class="name"><%= link_to airtime.anime.title, anime_path(airtime.anime) %></p
+         ><p class="check"><%= af.check_box :enable %></p>
+        </li>
+      <% end %>
+    <% end %>
+  <% end %>
+  </ul>
+  
+  <ul class="anime-list"
+  <% @channel.animes.each do |anime| %>
+    ><li><%= link_to image_tag(thumbnail_anime_path(anime)), anime_path(anime), :title=>anime.title %></li
+  <% end %>
+  ></ul>
+<% end %>
+</div>

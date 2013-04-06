@@ -1,0 +1,170 @@
+@import "compass";
+@import "zurui-sass";
+
+$header-base-color: #303030;
+$page-base-w-padding: 15px;
+$page-background: #fafafa;
+$page-base-color: #333333;
+$page-header-height: 33px;
+$page-footer-height: 30px;
+
+$link-list-background-color: #eeeeee;
+$link-list-active-background-color: #5393c5;
+$link-list-divider-background-color: #5393c5;
+
+
+@mixin header-footer-link($color: #ffffff) {
+  color: $color;
+  text-decoration: none;
+}
+
+@mixin submit-button {
+  @include appearance(none);
+  background: 0;
+  border: none;
+  
+  $height: 30px;
+  $bgcolor: lighten($header-base-color, 7%);
+  @include zurui-gradient-top-lighten($bgcolor);
+  @include zurui-ts-000;
+  @include border-radius($height/2);
+  @include box-shadow(0 0 7px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.35));
+  border: 1px solid darken($bgcolor, 10%);
+  height: $height;
+  line-height: $height;
+  vertical-align: middle;
+  color: #fff;
+  padding: 0 20px;
+  
+  &:hover {
+    @include zurui-gradient-top-lighten(lighten($bgcolor, 5%));
+  }
+}
+
+@mixin detail-header($height) {
+  height: $height;
+  line-height: $height;
+  vertical-align: middle;
+  @include zurui-gradient-top-lighten($header-base-color);
+  @include zurui-line-top;
+  @include zurui-ts-000;
+  display: block;
+  color: #fff;
+  font-size: 14px;
+  
+  h2 {
+    @include inline-block;
+    margin: 0;
+    padding: 0 $page-base-w-padding;
+    font-size: 16px;
+  }
+  p {
+    @include inline-block;
+    padding: 0;
+    margin: 0;
+  }
+  a {
+    color: #fff;
+    text-decoration: none;
+  }
+}
+
+@mixin option-nav($height) {
+  height: $height;
+  line-height: $height;
+  vertical-align: middle;
+  font-size: 14px;
+  
+  ul {
+    @include inline-block-list;
+    white-space: nowrap;
+    
+    li {
+      border-right: 1px solid darken($header-base-color, 10%);
+      text-align: center;
+      white-space: normal;
+      
+      &:last-child {
+        border-right-color: transparent;
+      }
+      
+      a {
+        @include zurui-gradient-top-lighten($header-base-color);
+        @include zurui-line-top;
+        @include zurui-ts-000;
+        display: block;
+        text-decoration: none;
+        color: #fff;
+        
+        &:hover {
+          @include zurui-gradient-top-lighten(lighten($header-base-color, 5%));
+        }
+      }
+      &.current a {
+        @include zurui-gradient-top-darken($link-list-active-background-color);
+      }
+    }
+  }
+}
+
+@mixin link-list($height: 50px) {
+  margin: 0;
+  padding: 0;
+  
+  li {
+    position: relative;
+    display: block;
+    margin: 0;
+    padding: 0;
+    height: $height;
+    line-height: $height;
+    
+    &:last-child a {
+      @include zurui-line-bottom;
+    }
+    
+    p {
+      @include inline-block;
+      margin: 0;
+      padding: 0;
+    }
+    
+    a {
+      @include zurui-gradient-top-lighten($link-list-background-color);
+      @include zurui-line-top;
+      display: block;
+      margin: 0;
+      padding: 0 15px;
+      text-decoration: none;
+      color: $page-base-color;
+      text-shadow: 0 1px 0 rgba(255,255,255,1);
+      font-weight: bold;
+      height: $height;
+      line-height: $height;
+      
+      &:hover {
+        @include zurui-gradient-top-lighten(darken($link-list-background-color, 5%));
+      }
+    }
+    
+    &.divider {
+      height: $height/2;
+      line-height: $height/2;
+      
+      a {
+        @include zurui-ts-000;
+        height: $height/2;
+        line-height: $height/2;
+        background: $link-list-divider-background-color;
+        display: block;
+        padding: 0 $page-base-w-padding;
+        text-decoration: none;
+        color: #fff;
+        
+        &:hover {
+          background: darken($link-list-divider-background-color, 5%);
+        }
+      }
+    }
+  }
+}

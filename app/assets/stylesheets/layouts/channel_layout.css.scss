@@ -1,0 +1,146 @@
+@import "application_helper";
+@import "airtime_helper";
+
+$channel-list-width: 300px;
+$channel-list-nav-height: 40px;
+$channel-summary-height: 40px;
+$channel-anime-list-width: 250px;
+
+div.channel.list {
+  @include zurui-line-right;
+  position: fixed;
+  top: $page-header-height + 1px;
+  bottom: $page-footer-height + 1px;
+  left: 0;
+  width: $channel-list-width;
+  
+  nav {
+    @include option-nav($channel-list-nav-height);
+    border-top-color: #000;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: -1px;
+    border-right: 1px solid;
+    vertical-align: middle;
+    
+    ul {
+      li {
+        width: $channel-list-width / 3;
+      }
+    }
+  }
+  
+  ul.list {
+    @include link-list;
+    position: absolute;
+    top: $channel-list-nav-height;
+    bottom: -1px;
+    left: 0;
+    right: 0;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    -webkit-overflow-scrolling: touch;
+    border-top: 1px solid;
+    
+    li {
+      $no-width: 50px;
+      a {
+        padding-right: $no-width;
+        p {
+          &.no {
+            position: absolute;
+            top: 5px;
+            right: 10px;
+            width: $no-width;
+            font-size: 10px;
+            font-weight: bold;
+            text-align: right;
+          }
+        }
+      }
+    }
+  }
+}
+
+div.channel.detail {
+  margin-left: $channel-list-width + 1px;
+  margin-top: $channel-summary-height;
+  margin-right: $channel-anime-list-width + 1px;
+  
+  div.summary {
+    @include detail-header($channel-summary-height);
+    position: fixed;
+    z-index: 10;
+    top: $page-header-height + 1px;
+    left: $channel-list-width + 1px;
+    right: 0;
+    
+    h2 {
+      margin-left: 25px;
+    }
+    p.no {
+      font-size: 10px;
+      font-weight: bold;
+      margin-bottom: -3px;
+      
+      b {
+        @include inline-block;
+        margin-top: -3px;
+        margin-right: 3px;
+        font-weight: normal;
+        
+        input {
+          width: 2em;
+          padding: 0 2px;
+          font-size: 12px;
+          line-height: 1;
+          text-align: right;
+        }
+      }
+    }
+    p.enable {
+      position: absolute;
+      top: -1px;
+      left: $page-base-w-padding;
+    }
+    nav {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      right: 0;
+      padding: 0 10px;
+      input {
+        @include submit-button;
+      }
+    }
+  }
+  
+  ul.airtime-list {
+    @include airtime-list;
+  }
+  
+  ul.anime-list {
+    @include inline-block-list;
+    @include zurui-line-left;
+    position: fixed;
+    top: $page-header-height + $channel-summary-height + 2px;
+    bottom: $page-footer-height + 1px;
+    right: 0;
+    width: $channel-anime-list-width;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    -webkit-overflow-scrolling: touch;
+    
+    li {
+      img {
+        display: block;
+        width: $channel-anime-list-width/2;
+        height: $channel-anime-list-width/2;
+        &:hover {
+          @include opacity(0.7);
+        }
+      }
+    }
+  }
+}

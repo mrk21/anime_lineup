@@ -1,0 +1,56 @@
+<% anime_init %>
+
+<div class="anime list">
+  <nav>
+    <ul>
+      <li class="<%= :current if params[:state].to_s.intern == :all %>"><%= link_to 'すべて', animes_path(:state=>:all) %></li
+     ><li class="<%= :current if params[:state].to_s.intern == :enabled %>"><%= link_to '有効', animes_path(:state=>:enabled) %></li
+     ><li class="<%= :current if params[:state].to_s.intern == :disabled %>"><%= link_to '無効', animes_path(:state=>:disabled) %></li>
+    </ul>
+  </nav>
+  
+  <ul class="list">
+  <% @animes.each do |anime| %>
+    <li class="<%= :current if @anime.id == anime.id %>"><a href="<%= anime_path(anime, :state=>params[:state]) %>">
+      <p class="thumbnail"><%= image_tag thumbnail_anime_path(anime) %></p>
+      <p class="title"><%= anime.title %></p>
+    </a></li>
+  <% end %>
+  </ul>
+</div>
+
+<div class="anime detail">
+<%= form_for @anime do |f| %>
+  <div class="summary">
+    <h2><%= @anime.title %></h2>
+    <p class="enable"><%= f.check_box :enable %></p>
+    <nav><%= f.submit '保存' %></nav>
+  </div>
+  
+  <div class="content">
+    <div class="video"><%= anime_video_tag @anime %></div>
+    <p class="description"><%= @anime.description %></p>
+    <nav>
+      <ul>
+        <li><%= anime_site_link_to @anime, 'ホームページ' %></li>
+      </ul>
+    </nav>
+  </div>
+  
+  <ul class="airtime-list">
+  <% @_airtime_groups.each do |day_name, airtimes| %>
+    <li class="divider"><%= link_to t(day_name), lineup_path(day_name) %></li>
+    
+    <% airtimes.each do |airtime| %>
+      <%= f.fields_for :airtimes, airtime do |af| %>
+        <li class="item">
+          <p class="time"><%= link_to format_time(airtime.start_time), lineup_path(airtime.day_name)+"#airtime_#{airtime.id}" %></p>
+          <p class="name"><%= link_to airtime.channel.name, channel_path(airtime.channel, :state=>:all)+"#airtime_#{airtime.id}" %></p>
+          <p class="check"><%= af.check_box :enable %></p>
+        </li>
+      <% end %>
+    <% end %>
+  <% end %>
+  </ul>
+<% end %>
+</div>

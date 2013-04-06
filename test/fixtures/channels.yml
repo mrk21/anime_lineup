@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+# This model initially had no columns defined.  If you add columns to the
+# model remove the '{}' from the fixture names and add the columns immediately
+# below each fixture, per the syntax in the comments below
+#
+channel_tokyomx:
+  id: 1
+  name: 'TOKYO MX'
+  description: 'アニメ鉄板'
+  state: 1
+
+channel_chibatv:
+  id: 2
+  name: 'チバテレビ'
+  description: 'アニメ鉄板 その2'
+  state: 1

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>AnimeLineup</title>
+  <%= stylesheet_link_tag    "application", :media => "all" %>
+  <%= csrf_meta_tags %>
+</head>
+<body class="<%= controller_name.gsub('_','-') %>">
+  <article class="page">
+    <header class="page">
+      <h1><%= link_to 'AnimeLineup', '/' %></h1>
+      <nav class="main">
+        <ul>
+          <li class="lineups"><%= link_to '番組表', today_lineup_path %></li>
+          <li class="animes"><%= link_to 'アニメ', animes_path %></li>
+          <li class="channels"><%= link_to 'チャンネル', channels_path %></li>
+        </ul>
+      </nav>
+      
+      <nav class="system">
+        <ul>
+          <li><%= link_to '設定', system_setting_path %></li>
+        </ul>
+      </nav>
+    </header>
+    
+    <div class="page body">
+      <%= yield %>
+    </div>
+    
+    <footer class="page">
+      <p class="copyright"><small>Copyright &copy; <%= Time.now.year %> <b>@mrk_21</b>. Powered by <a target="_blank" href="http://animemap.net/">Animemap</a>.</small></p>
+    </footer>
+  </article>
+  
+  <%= javascript_include_tag "application" %>
+</body>
+</html>

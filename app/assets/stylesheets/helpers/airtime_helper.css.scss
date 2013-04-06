@@ -1,0 +1,57 @@
+@mixin airtime-list {
+  @include link-list;
+  
+  li {
+    &.item {
+      $time-width: 70px;
+      $check-width: 50px;
+      
+      p {
+        &.time {
+          @include zurui-line-right;
+          position: absolute;
+          top: 0;
+          bottom: 0;
+          left: 0;
+          width: $time-width;
+          font-size: 12px;
+          
+          a {
+            display: block;
+            text-decoration: none;
+            color: #000;
+          }
+        }
+        &.name {
+          display: block;
+          margin-left: $time-width;
+          margin-right: $check-width;
+          
+          a {
+            display: block;
+            text-decoration: none;
+            color: #000;
+          }
+        }
+        &.check {
+          @include zurui-gradient-top-lighten($link-list-background-color);
+          @include zurui-line-left;
+          @include zurui-line-top;
+          
+          position: absolute;
+          z-index: 3;
+          top: 0;
+          right: 0;
+          bottom: 0;
+          padding: 0 15px;
+          width: $check-width - 30px;
+          
+          input {
+            position: relative;
+            left: 2px;
+          }
+        }
+      }
+    }
+  }
+}

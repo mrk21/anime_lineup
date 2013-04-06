@@ -1,0 +1,45 @@
+<% init_lineup %>
+
+<div class="lineup summary">
+  <nav>
+    <ul
+    <% Airtime.days.each do |k,i| %>
+     ><li class="<%= 'current' if current_day?(k) %>"><%= link_to t(k), lineup_path(k) %></li
+    <% end %>
+   ></ul>
+  </nav>
+</div>
+
+<table class="lineup">
+  <thead>
+    <tr>
+      <th class="time"><span>&nbsp;<span></th>
+      <% @channels.each do |channel| %>
+        <th><span><a href="<%= channel_path(channel.id) %>">
+          <p class="name"><%= channel.name %></p>
+          <% unless channel.no.blank? then %>
+            <p class="no"><b><%= channel.no %></b>ch</p>
+          <% end %>
+        </a></span></th>
+      <% end %>
+    </tr>
+  </thead>
+  
+  <tbody>
+  <% @_timetable.each_with_index do |time,i| %>
+    <tr id="timetable_<%= time %>" class="<%= 'has-airtime' if has_airtimes?(time) %>">
+      <th class="time"><span><%= "%02d" % time %></span></th>
+      <% @channels.each do |channel| %>
+        <td>
+        <% current_airtimes(channel.id, time).each do |airtime| %>
+          <a href="<%= anime_path(airtime.anime.id) %>" id="airtime_<%= airtime.id %>" class="airtime <%= airtime_state_class(airtime) %>">
+            <p class="time"><%= "%02d" % airtime.start_time_m %></p>
+            <p class="title"><%= airtime.anime.title %></p>
+          </a>
+        <% end %>
+        </td>
+      <% end %>
+    </tr>
+  <% end %>
+  </tbody>
+</table>

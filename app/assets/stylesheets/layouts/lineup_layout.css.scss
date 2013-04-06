@@ -1,0 +1,173 @@
+@import "application_helper";
+
+$lineup-nav-height: 40px;
+
+div.lineup {
+  position: fixed;
+  z-index: 5;
+  top: $page-header-height + 1px;
+  left: 0;
+  right: 0;
+  
+  nav {
+    @include option-nav($lineup-nav-height);
+    ul {
+      li {
+        width: (100%/7);
+      }
+    }
+  }
+}
+
+table.lineup {
+  margin-top: $lineup-nav-height;
+  border-top: 1px solid #aaaaaa;
+  border-bottom: 1px solid #aaaaaa;
+  width: 100%;
+  
+  th {
+    white-space: nowrap;
+    > span {
+      white-space: normal;
+    }
+  }
+  th, td {
+    min-width: 100px;
+    padding: 0 5px;
+    border: 1px solid #ccc;
+  }
+  th.time {
+    min-width: auto;
+  }
+  
+  thead {
+    line-height: 30px;
+    font-size: 12px;
+    color: #fff;
+    text-align: center;
+    vertical-align: middle;
+    
+    th {
+      @include zurui-gradient-top-lighten($header-base-color);
+      @include zurui-ts-000;
+      @include zurui-line-top;
+      border-left: none;
+      border-right: 1px solid darken($header-base-color, 50%);
+      border-bottom: 1px solid darken($header-base-color, 50%);
+      
+      &:not(.time):hover {
+        @include zurui-gradient-top-lighten(lighten($header-base-color, 5%));
+      }
+      
+      a {
+        display: block;
+        p {
+          @include inline-block;
+          padding: 0;
+          margin: 0;
+          
+          &.no {
+            font-size: 10px;
+            margin-bottom: -2px;
+          }
+        }
+      }
+    }
+    a {
+      position: relative;
+      top: 1px;
+      text-decoration: none;
+      color: #fff;
+    }
+  }
+  
+  tbody {
+    th {
+      border-bottom: none;
+      border-top: none;
+      @include zurui-gradient-top-lighten(lighten($header-base-color, 0%));
+      @include zurui-line-top;
+      @include zurui-ts-000;
+      font-size: 12px;
+      font-weight: bold;
+      vertical-align: top;
+      padding-top: 3px;
+      border-left: 0;
+      color: #fff;
+      height: 20px;
+      width: 30px;
+      text-align: center;
+    }
+    
+    td {
+      @include zurui-gradient-top-lighten(#fafafa);
+      vertical-align: top;
+      font-size: 12px;
+      margin: 0;
+      padding: 0;
+      
+      a {
+        margin: 0;
+        padding: 0;
+        display: block;
+        text-decoration: none;
+        color: $page-base-color;
+      }
+      p {
+        margin: 0;
+        padding: 0;
+      }
+      a.airtime {
+        $bgcolor: #5da9e3;
+        @include border-radius(10px);
+        @include text-shadow(0 1px 0 rgba(0,0,0,0.3));
+        height: 20px;
+        line-height: 20px;
+        padding: 0 10px;
+        margin: 1px;
+        border: 1px solid darken($bgcolor, 10%);
+        white-space: nowrap;
+        background: $bgcolor;
+        color: lighten($bgcolor,35%);
+        
+        &:hover {
+          background: darken($bgcolor, 5%);
+        }
+        p {
+          @include inline-block;
+          white-space: normal;
+          &.time {
+            letter-spacing: -1px;
+            font-weight: bold;
+            margin-right: 5px;
+          }
+        }
+        
+        &.new {
+          $bgcolor: #eee;
+          @include text-shadow(0 1px 0 rgba(255,255,255,0.5));
+          background: $bgcolor;
+          border: 1px solid darken($bgcolor, 10%);
+          color: $page-base-color;
+          &:hover {
+            background: darken($bgcolor, 5%);
+          }
+        }
+        &.first-air {
+          $bgcolor: #eeee61;
+          @include text-shadow(0 1px 0 rgba(255,255,255,0.5));
+          background: $bgcolor;
+          border: 1px solid darken($bgcolor, 20%);
+          color: $page-base-color;
+          &:hover {
+            background: darken($bgcolor, 5%);
+          }
+        }
+      }
+    }
+    
+    tr:first-child td {
+      border-top: none;
+    }
+  }
+}
