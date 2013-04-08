@@ -73,6 +73,10 @@ div.anime.list {
           @include opacity(0.7);
         }
       }
+      
+      &.current:hover p.thumbnail img {
+        @include opacity(1);
+      }
     }
   }
 }

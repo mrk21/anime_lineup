@@ -8,10 +8,10 @@ class GoogleSearch::Video::Youtube < GoogleSearch::Video
   end
   
   def embedded_url
-    url = self.playUrl
-    return nil if url.blank?
-    id = url.sub(/^http:\/\/youtube.googleapis.com\/v\/([^&?]+).*$/,'\1')
-    return nil if id.blank?
+    uri = self.playUrl
+    return nil if uri.blank?
+    video_id = uri.sub(/^http:\/\/youtube.googleapis.com\/v\/([^&?]+).*$/,'\1')
+    return nil if video_id.blank?
     "http://www.youtube-nocookie.com/embed/#{id}?rel=0"
   end
 end

@@ -7,6 +7,9 @@ class Anime < ActiveRecord::Base
   has_many :channels, :through=>:airtimes
   accepts_nested_attributes_for :airtimes
   
+  has_many :airtimes_under_enabled_channels, :class_name=>Airtime, :include=>:channel, :conditions=>Channel.arel_table[:enable].eq(1)
+  has_many :enabled_channels, :source=>:channel, :through=>:airtimes_under_enabled_channels
+  
   IMAGE_THUMBNAIL_SIZE = 250
   IMAGE_BASE_PATH = File.join(Rails.root, 'tmp/cache/images')
   
@@ -57,18 +60,18 @@ class Anime < ActiveRecord::Base
   end
   
   def search_image_urls
-    @search_images_urls ||= self.search_images.map{|v| v.unescapedUrl rescue nil}.compact
-    @search_images_urls
+    @search_image_urls ||= self.search_images.map{|v| v.unescapedUrl rescue nil}.compact
+    @search_image_urls
   end
   
   def search_video_urls
-    @search_videos_urls ||= self.search_videos.map{|v| v.embedded_url rescue nil}.compact
-    @search_videos_urls
+    @search_video_urls ||= self.search_videos.map{|v| v.embedded_url rescue nil}.compact
+    @search_video_urls
   end
   
   def search_site_urls
-    @search_sites_urls ||= self.search_sites.map{|v| v.unescapedUrl rescue nil}.compact
-    @search_sites_urls
+    @search_site_urls ||= self.search_sites.map{|v| v.unescapedUrl rescue nil}.compact
+    @search_site_urls
   end
   
   def autoset_image_url

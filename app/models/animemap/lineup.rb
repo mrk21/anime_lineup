@@ -93,7 +93,7 @@ class Animemap::Lineup < ActiveResource::Base
   def self.import
     records = self.find_by_region(:ibaraki)
     fetch_airtimes = []
-    fetch_animes = []
+    new_animes = []
     
     records.each do |record|
       channel_name = self.channels(record.station) || record.station
@@ -101,8 +101,10 @@ class Animemap::Lineup < ActiveResource::Base
       channel = Channel.create(:name=>channel_name) if channel.blank?
       
       anime = Anime.where(:title=>record.title).first
-      anime = Anime.create(:title=>record.title) if anime.blank?
-      fetch_animes << anime
+      if anime.blank? then
+        anime = Anime.create(:title=>record.title)
+        new_animes << anime
+      end
       
       airtime = Airtime.where(:anime_id=>anime.id, :channel_id=>channel.id).first
       airtime = Airtime.new(:anime_id=>anime.id, :channel_id=>channel.id) if airtime.blank?
@@ -135,7 +137,7 @@ class Animemap::Lineup < ActiveResource::Base
       "id NOT IN (#{fetch_airtimes.map{|v| v.id}.join(',')})"
     ) unless fetch_airtimes.blank?
     
-    threads = fetch_animes.uniq.map do |anime|
+    threads = new_animes.uniq.map do |anime|
       puts anime.title
       sleep 0.5
       Thread.new{anime.autoset.save} 

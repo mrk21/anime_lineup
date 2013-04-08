@@ -15,9 +15,7 @@ class Airtime < ActiveRecord::Base
   scope :disabled, lambda{ where(:enable=>0).   or(Anime.arel_table[:enable].eq(0)).   or(Channel.arel_table[:enable].eq(0)).includes([:anime, :channel]) }
   scope :ordered, lambda{ order [:day,:start_time] }
   
-  scope :with_anime, lambda{
-    includes(:anime)
-  }
+  scope :with_anime, lambda{ includes :anime }
   
   scope :on_day, lambda{|day|
     where(:day=> self.days(day).nil? ? day : self.days(day))

@@ -1,7 +1,7 @@
 module LineupsHelper
   def init_lineup
-    min = @airtimes.min{|r| r.start_time}.start_time_h - 4
-    max = @airtimes.max{|r| r.start_time}.start_time_h + 4
+    min = @airtimes.min{|r| r.start_time}.start_time_h - 4 rescue 20
+    max = @airtimes.max{|r| r.start_time}.start_time_h + 4 rescue 24
     
     @_timetable = (min..max)
     @_airtime_timetables = @airtimes.group_by{|r| r.start_time_h}

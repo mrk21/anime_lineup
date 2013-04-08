@@ -1,6 +1,6 @@
 module AnimesHelper
   def anime_init
-    @_airtime_groups = @anime.airtimes.group_by{|r| r.day_name}
+    @_airtime_groups = @anime.airtimes_under_enabled_channels.group_by{|r| r.day_name}
   end
   
   def anime_image_tag(anime, options={})
@@ -26,6 +26,14 @@ module AnimesHelper
     options[:target] ||= '_blank'
     url_params = options.delete(:url_params)
     link_to content, site_anime_path(anime, url_params), options
+  end
+  
+  def anime_image_link_to(anime, content, options={})
+    return '' if anime.image_url.blank?
+    options.symbolize_keys!
+    options[:target] ||= '_blank'
+    url_params = options.delete(:url_params)
+    link_to content, image_anime_path(anime, url_params), options
   end
   
   def anime_video_tag(anime, options={})

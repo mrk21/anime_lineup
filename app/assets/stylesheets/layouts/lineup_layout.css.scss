@@ -11,9 +11,11 @@ div.lineup {
   
   nav {
     @include option-nav($lineup-nav-height);
+    
     ul {
       li {
         width: (100%/7);
+        border-bottom: 1px solid darken($header-base-color, 40%);
       }
     }
   }
@@ -22,7 +24,6 @@ div.lineup {
 table.lineup {
   margin-top: $lineup-nav-height;
   border-top: 1px solid #aaaaaa;
-  border-bottom: 1px solid #aaaaaa;
   width: 100%;
   
   th {
@@ -83,9 +84,10 @@ table.lineup {
   
   tbody {
     th {
-      border-bottom: none;
       border-top: none;
-      @include zurui-gradient-top-lighten(lighten($header-base-color, 0%));
+      border-right: 1px solid darken($header-base-color, 80%);
+      border-bottom: 1px solid darken($header-base-color, 80%);
+      @include zurui-gradient-top-lighten($header-base-color);
       @include zurui-line-top;
       @include zurui-ts-000;
       font-size: 12px;
@@ -101,6 +103,8 @@ table.lineup {
     
     td {
       @include zurui-gradient-top-lighten(#fafafa);
+      @include zurui-ts-000;
+      border-top-color: #ccc;
       vertical-align: top;
       font-size: 12px;
       margin: 0;

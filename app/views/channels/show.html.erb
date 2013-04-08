@@ -45,7 +45,7 @@
   </ul>
   
   <ul class="anime-list"
-  <% @channel.animes.each do |anime| %>
+  <% @channel.enabled_animes.each do |anime| %>
     ><li><%= link_to image_tag(thumbnail_anime_path(anime)), anime_path(anime), :title=>anime.title %></li
   <% end %>
   ></ul>

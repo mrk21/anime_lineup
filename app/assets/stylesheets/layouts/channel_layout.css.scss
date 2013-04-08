@@ -51,7 +51,7 @@ div.channel.list {
           &.no {
             position: absolute;
             top: 5px;
-            right: 10px;
+            right: $page-base-w-padding;
             width: $no-width;
             font-size: 10px;
             font-weight: bold;
