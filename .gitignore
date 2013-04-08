@@ -1,9 +1,15 @@
 .DS_Store
 Gemfile.lock
-log/*.log
+*.log
 tmp/cache/assets/*
 tmp/cache/sass/*
 tmp/cache/images
 tmp/pids/*
 tmp/sockets/*
+config/deployments/basic_auth
+config/deployments/ssl.crt
+config/deployments/ssl.csr
+config/deployments/ssl.key
+config/deployments/ssl.key.org
+public/assets/
 
