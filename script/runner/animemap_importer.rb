@@ -1,1 +1,0 @@
-Animemap::Lineup.import

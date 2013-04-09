@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# Credit Manager Server startup script
+# Anime Lineup Server startup script
 #
 # chkconfig:    345 80 20
 # description:  Anime Lineup Server
@@ -9,7 +9,7 @@
 # Source function library.
 . /etc/rc.d/init.d/functions
 
-lock=/var/lock/subsys/credit_manager
+lock=/var/lock/subsys/anime_lineup
 
 start() {
   su - web -c 'cd ~/anime_lineup; unicorn_rails -c config/unicorn.rb -E production -D'
