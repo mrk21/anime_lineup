@@ -1,12 +1,8 @@
 AnimeLineup::Application.routes.draw do
   root :to => 'lineups#show'
   
-  resources :channels, :only=>[:index, :show, :update] do
-    resources :airtimes, :only=>[:index, :show, :update]
-  end
-  
-  resources :animes, :only=>[:index, :show, :update] do
-    resources :airtimes, :only=>[:index, :show, :update]
+  resources :channels, :only=>[:index, :show, :create, :update, :destroy]
+  resources :animes, :only=>[:index, :show, :create, :update, :destroy] do
     member do
       get :image
       get :thumbnail

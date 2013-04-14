@@ -5,7 +5,7 @@ require 'RMagick'
 class Anime < ActiveRecord::Base
   has_many :airtimes, :include=>:channel, :dependent=> :destroy
   has_many :channels, :through=>:airtimes
-  accepts_nested_attributes_for :airtimes
+  accepts_nested_attributes_for :airtimes, :allow_destroy=>true
   
   has_many :airtimes_under_enabled_channels, :class_name=>Airtime, :include=>:channel, :conditions=>Channel.arel_table[:enable].eq(1)
   has_many :enabled_channels, :source=>:channel, :through=>:airtimes_under_enabled_channels

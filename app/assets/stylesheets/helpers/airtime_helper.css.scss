@@ -1,11 +1,11 @@
 @mixin airtime-list {
+  $delete-width: 70px;
+  $time-width: 70px;
+  $check-width: 50px;
   @include link-list;
   
   li {
     &.item {
-      $time-width: 70px;
-      $check-width: 50px;
-      
       p {
         &.time {
           @include zurui-line-right;
@@ -13,10 +13,15 @@
           top: 0;
           bottom: 0;
           left: 0;
-          width: $time-width;
+          padding: 0 15px;
+          width: $time-width - 30px;
           font-size: 12px;
+          font-weight: bold;
+          color: #000;
           
           a {
+            margin: 0 -15px;
+            padding: 0 15px;
             display: block;
             text-decoration: none;
             color: #000;
@@ -36,7 +41,6 @@
         &.check {
           @include zurui-gradient-top-lighten($link-list-background-color);
           @include zurui-line-left;
-          @include zurui-line-top;
           
           position: absolute;
           z-index: 3;
@@ -51,7 +55,40 @@
             left: 2px;
           }
         }
+        &.delete {
+          @include zurui-gradient-top-lighten($link-list-background-color);
+          @include zurui-line-left;
+          display: none;
+          position: absolute;
+          z-index: 3;
+          top: 0;
+          right: 0;
+          bottom: 0;
+          padding: 0 5px;
+          width: $delete-width - 10px;
+          text-align: center;
+          
+          button {
+            @include submit-button;
+            padding-left: 10px;
+            padding-right: 10px;
+            
+          }
+        }
       }
+      
+      &.new, &.new p.check, &.new p.delete {
+        @include zurui-gradient-top-lighten(#ffffaa);
+      }
+    }
+  }
+  
+  &.delete li.item p {
+    &.check {
+      display: none;
+    }
+    &.delete {
+      display: block;
     }
   }
 }

@@ -1,0 +1,24 @@
+<% if @withDivider: %>
+  <li class="divider" data-day="<%= @airtime.get('day') %>"><%= @airtime.dayName() %></li>
+<% end %>
+
+<% name = (key) => "anime[airtimes_attributes][#{@i}][#{key}]" %>
+<li class="new item">
+  <input name="<%= name('day') %>" type="hidden" value="<%= @airtime.get('day') %>">
+  <input name="<%= name('state') %>" type="hidden" value="<%= @airtime.get('state') %>">
+  <p class="time">
+    <%= @airtime.formatted_start_time() %>
+    <input name="<%= name('start_time') %>" type="hidden" value="<%= @airtime.get('start_time') %>">
+  </p>
+  <p class="name">
+    <%= @airtime.channel().get('name') %>
+    <input name="<%= name('channel_id') %>" type="hidden" value="<%= @airtime.get('channel_id') %>">
+  </p>
+  <p class="check">
+    <input name="<%= name('enable') %>" type="hidden" value="0">
+    <input name="<%= name('enable') %>" type="checkbox" value="<%= @airtime.get('enable') %>" <%= 'checked' if @airtime.get('enable') %>></p>
+  </p>
+  <p class="delete">
+    <button type="button" class="AirtimesView-delete-item">削除</button>
+  </p>
+</li>

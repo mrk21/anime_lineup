@@ -1,8 +1,10 @@
 @import "application_helper";
 @import "airtime_helper";
+@import "widget/dialog_helper";
 
 $anime-list-width: 300px;
 $anime-list-nav-height: 40px;
+$anime-list-menu-height: 40px;
 $anime-summary-height: 40px;
 $anime-airtime-list-width: 270px;
 
@@ -32,12 +34,24 @@ div.anime.list {
     }
   }
   
+  menu {
+    @include zurui-line-top;
+    @include action-menu($anime-list-menu-height);
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: -1px;
+    li {
+      width: $anime-list-width/2;
+    }
+  }
+  
   ul.list {
     $thumbnail-size: 75px;
     @include link-list($thumbnail-size);
     position: absolute;
     top: $anime-list-nav-height;
-    bottom: -1px;
+    bottom: $anime-list-menu-height;
     left: 0;
     right: 0;
     overflow-y: scroll;
@@ -49,6 +63,7 @@ div.anime.list {
       padding-left: $thumbnail-size+1px;
       
       a {
+        margin-left: 0;
         p {
           margin: 0;
           padding: 0;
@@ -67,6 +82,9 @@ div.anime.list {
               height: $thumbnail-size;
               width: $thumbnail-size;
             }
+          }
+          &.title {
+            width: $anime-list-width - $thumbnail-size - 2*$page-base-w-padding - 1px;
           }
         }
         &:hover p.thumbnail img {
@@ -140,16 +158,116 @@ div.anime.detail {
     }
   }
   
-  ul.airtime-list {
-    @include airtime-list;
+  div.airtime-list {
+    $menu-height: 40px;
+    
     @include zurui-line-left;
     position: fixed;
     top: $page-header-height + $anime-summary-height + 2px;
     right: 0;
     bottom: $page-footer-height;
     width: $anime-airtime-list-width;
-    overflow-x: hidden;
-    overflow-y: scroll;
-    -webkit-overflow-scrolling: touch;
+    
+    ul.list {
+      @include airtime-list;
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: $menu-height;
+      overflow-x: hidden;
+      overflow-y: scroll;
+      -webkit-overflow-scrolling: touch;
+    }
+    
+    menu {
+      @include zurui-line-top;
+      @include action-menu($anime-list-menu-height);
+      position: absolute;
+      bottom: 0;
+      left: -1px;
+      right: 0;
+      li {
+        width: $anime-airtime-list-width/2;
+      }
+    }
+    
+    &.delete {
+      menu {
+        li {
+          &.new {
+            display: none;
+          }
+          &.delete {
+            width: $anime-airtime-list-width;
+          }
+        }
+      }
+    }
+  }
+}
+
+div.animes.new.dialog.base {
+  @include dialog(350px,95px);
+  
+  section.dialog {
+    p {
+      @include inline-block;
+      margin: 0;
+      padding: 0;
+    }
+    p[data-fields=title] {
+      label { display: none; }
+      input { width: 235px; }
+      div[data-error] { display: none; }
+      .error input {
+        background: #ffffaa;
+      }
+    }
+    input[type=submit] {
+      @include submit-button;
+    }
+  }
+}
+
+div.animes.delete.dialog.base {
+  @include dialog(350px,95px);
+  section.dialog {
+    div.dialog.body {
+      text-align: right;
+      input[type=submit] {
+        @include submit-button;
+      }
+    }
+  }
+}
+
+div.airtimes.new.dialog.base {
+  @include dialog(402px,95px);
+  section.dialog {
+    label { display: none; }
+    div[data-error] { display: none; }
+    .error input {
+      background: #ffffaa;
+    }
+    p {
+      @include inline-block;
+      margin: 0;
+      padding: 0;
+      &.day select {
+        width: 50px;
+      }
+      &.start_time_str input {
+        width: 80px;
+        font-size: 12px;
+        text-align: right;
+      }
+      &.channel_id select {
+        width: 150px;
+      }
+    }
+    button {
+      @include submit-button;
+    }
   }
 }

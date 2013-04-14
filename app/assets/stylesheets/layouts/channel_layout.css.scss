@@ -1,8 +1,10 @@
 @import "application_helper";
 @import "airtime_helper";
+@import "widget/dialog_helper";
 
 $channel-list-width: 300px;
 $channel-list-nav-height: 40px;
+$channel-list-menu-height: 40px;
 $channel-summary-height: 40px;
 $channel-anime-list-width: 250px;
 
@@ -31,11 +33,23 @@ div.channel.list {
     }
   }
   
+  menu {
+    @include zurui-line-top;
+    @include action-menu($channel-list-menu-height);
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: -1px;
+    li {
+      width: $channel-list-width/2;
+    }
+  }
+  
   ul.list {
     @include link-list;
     position: absolute;
     top: $channel-list-nav-height;
-    bottom: -1px;
+    bottom: $channel-list-menu-height;
     left: 0;
     right: 0;
     overflow-y: scroll;
@@ -140,6 +154,41 @@ div.channel.detail {
         &:hover {
           @include opacity(0.7);
         }
+      }
+    }
+  }
+}
+
+div.channels.new.dialog.base {
+  @include dialog(350px,95px);
+  
+  section.dialog {
+    p {
+      @include inline-block;
+      margin: 0;
+      padding: 0;
+    }
+    p[data-fields=name] {
+      label { display: none; }
+      input { width: 235px; }
+      div[data-error] { display: none; }
+      .error input {
+        background: #ffffaa;
+      }
+    }
+    input[type=submit] {
+      @include submit-button;
+    }
+  }
+}
+
+div.channels.delete.dialog.base {
+  @include dialog(350px,95px);
+  section.dialog {
+    div.dialog.body {
+      text-align: right;
+      input[type=submit] {
+        @include submit-button;
       }
     }
   }

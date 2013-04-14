@@ -1,0 +1,69 @@
+@mixin dialog($width: 400px, $height: 200px, $z-index: 1000) {
+  position: fixed;
+  z-index: $z-index;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 0;
+  
+  section.dialog {
+    $header-height: 35px;
+    @include box-shadow(0 2px 3px rgba(0,0,0,0.75));
+    position: fixed;
+    z-index: 2;
+    top: 50%;
+    left: 50%;
+    margin-left: -$width/2;
+    margin-top: -$height/2;
+    width: $width;
+    height: $height;
+    
+    header.dialog {
+      @include border-top-right-radius(3px);
+      @include border-top-left-radius(3px);
+      @include zurui-gradient-top-lighten($header-base-color);
+      @include zurui-ts-000;
+      @include zurui-line-top;
+      border: 1px solid darken($header-base-color, 10%);
+      height: $header-height;
+      line-height: $header-height;
+      vertical-align: middle;
+      padding: 0 $page-base-w-padding;
+      color: #fff;
+      
+      h2 {
+        margin: 0;
+        padding: 0;
+        font-size: 14px;
+        height: $header-height;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+    }
+    
+    div.body.dialog {
+      @include border-bottom-right-radius(3px);
+      @include border-bottom-left-radius(3px);
+      @include zurui-line-top;
+      @include text-shadow(0 1px 0 rgba(255,255,255,0.5));
+      height: $height - $header-height - $page-base-w-padding*2;
+      padding: $page-base-w-padding;
+      background: $page-background;
+      
+      p {
+        margin: 0;
+      }
+    }
+  }
+  
+  div.dialog.overlay {
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0,0,0,0.35);
+  }
+}

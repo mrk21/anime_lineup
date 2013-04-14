@@ -1,0 +1,8 @@
+<% if @type == 'header': %>
+  <h2>"<%= @channel.get('name') %>"の削除</h2>
+  
+<% else if @type == 'body': %>
+  <%- @formTag "/channels/#{@channel.id}", 'delete', () => %>
+    <input type="submit" value="削除">
+  <% end %>
+<% end %>

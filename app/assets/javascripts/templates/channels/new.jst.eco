@@ -1,0 +1,9 @@
+<% if @type == 'header': %>
+  <h2>チャンネルの追加</h2>
+  
+<% else if @type == 'body': %>
+  <%- @formTag '/channels', 'post', () -> %>
+    <p class="name" data-fields="name"></p>
+    <input type="submit" value="追加">
+  <% end %>
+<% end %>

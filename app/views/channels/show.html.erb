@@ -1,6 +1,6 @@
 <% channel_init %>
 
-<div class="channel list">
+<div class="channel list -V" data-view-name="ChannelsView">
   <nav>
     <ul>
       <li class="<%= :current if params[:state].to_s.intern == :all %>"><%= link_to 'すべて', channels_path(:state=>:all) %></li
@@ -11,12 +11,19 @@
   
   <ul class="list">
   <% @channels.each do |channel| %>
-    <li class="<%= :current if @channel.id == channel.id %>"><a href="<%= channel_path(channel, :state=>params[:state]) %>">
-      <p class="name"><%= channel.name %></p>
-      <p class="no"><%=raw "<b>#{channel.no}</b>ch" unless channel.no.blank? %></p>
-    </a></li>
+    <li data-name="<%= channel.name %>" data-id="<%= channel.id %>" class="<%= :current if @channel.id == channel.id %>">
+      <a href="<%= channel_path(channel, :state=>params[:state]) %>">
+        <p class="name"><%= channel.name %></p>
+        <p class="no"><%=raw "<b>#{channel.no}</b>ch" unless channel.no.blank? %></p>
+      </a>
+    </li>
   <% end %>
   </ul>
+  
+  <menu>
+    <li class="ChannelsView-new">追加</li
+   ><li class="ChannelsView-delete">削除</li>
+  </menu>
 </div>
 
 <div class="channel detail">

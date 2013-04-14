@@ -12,11 +12,23 @@ class AnimesController < ApplicationController
     @anime = @animes.find(params[:id])
   end
   
+  def create
+    @anime = Anime.new(params[:anime])
+    @anime.autoset.save
+    redirect_to anime_path(@anime)
+  end
+  
   def update
     @anime = Anime.find(params[:id])
     @anime.update_attributes(params[:anime])
     state = params[:state].to_s.intern == :all ? :all : @anime.enable == 1 ? :enabled : :disabled
     redirect_to anime_path(@anime, :state=>state)
+  end
+  
+  def destroy
+    @anime = Anime.find(params[:id])
+    @anime.destroy
+    redirect_to animes_path
   end
   
   def video
@@ -63,6 +75,7 @@ class AnimesController < ApplicationController
   protected
   
   def fetch_animes
+    @channels = Channel.enabled.ordered
     @animes = Anime.ordered
     case params[:state].to_s.intern
       when :enabled  then @animes = @animes.enabled

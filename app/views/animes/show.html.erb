@@ -1,6 +1,6 @@
 <% anime_init %>
 
-<div class="anime list">
+<div class="anime list -V" data-view-name="AnimesView">
   <nav>
     <ul>
       <li class="<%= :current if params[:state].to_s.intern == :all %>"><%= link_to 'すべて', animes_path(:state=>:all) %></li
@@ -11,12 +11,19 @@
   
   <ul class="list">
   <% @animes.each do |anime| %>
-    <li class="<%= :current if @anime.id == anime.id %>"><a href="<%= anime_path(anime, :state=>params[:state]) %>">
-      <p class="thumbnail"><%= image_tag thumbnail_anime_path(anime) %></p>
-      <p class="title"><%= anime.title %></p>
-    </a></li>
+    <li data-title="<%= anime.title %>" data-id="<%= anime.id %>" class="<%= :current if @anime.id == anime.id %>">
+      <a href="<%= anime_path(anime, :state=>params[:state]) %>">
+        <p class="thumbnail"><%= image_tag thumbnail_anime_path(anime) %></p>
+        <p class="title"><%= anime.title %></p>
+      </a>
+    </li>
   <% end %>
   </ul>
+  
+  <menu>
+    <li class="AnimesView-new">追加</li
+   ><li class="AnimesView-delete">削除</li>
+  </menu>
 </div>
 
 <div class="anime detail">
@@ -37,20 +44,28 @@
     </nav>
   </div>
   
-  <ul class="airtime-list">
-  <% @_airtime_groups.each do |day_name, airtimes| %>
-    <li class="divider"><%= link_to t(day_name), lineup_path(day_name) %></li>
-    
-    <% airtimes.each do |airtime| %>
-      <%= f.fields_for :airtimes, airtime do |af| %>
-        <li class="item">
-          <p class="time"><%= link_to format_time(airtime.start_time), lineup_path(airtime.day_name)+"#airtime_#{airtime.id}" %></p>
-          <p class="name"><%= link_to airtime.channel.name, channel_path(airtime.channel, :state=>:all)+"#airtime_#{airtime.id}" %></p>
-          <p class="check"><%= af.check_box :enable %></p>
-        </li>
+  <div class="airtime-list -V" data-view-name="AirtimesView" data-channels="<%= @channels.map{|r| {:id=>r.id, :name=>r.name}}.to_json %>">
+    <ul class="list">
+    <% @_airtime_groups.each do |day_name, airtimes| %>
+      <li class="divider" data-day="<%= Airtime.days(day_name) %>"><%= link_to t(day_name), lineup_path(day_name) %></li>
+      
+      <% airtimes.each do |airtime| %>
+        <%= f.fields_for :airtimes, airtime do |af| %>
+          <li class="item">
+            <p class="time"><%= link_to format_time(airtime.start_time), lineup_path(airtime.day_name)+"#airtime_#{airtime.id}" %></p>
+            <p class="name"><%= link_to airtime.channel.name, channel_path(airtime.channel, :state=>:all)+"#airtime_#{airtime.id}" %></p>
+            <p class="check"><%= af.check_box :enable %></p>
+            <p class="delete"><button type="button" class="AirtimesView-delete-item">削除<%= af.hidden_field :_destroy %></button></p>
+          </li>
+        <% end %>
       <% end %>
     <% end %>
-  <% end %>
-  </ul>
+    </ul>
+    
+    <menu>
+      <li class="AirtimesView-new new">追加</li
+     ><li class="AirtimesView-delete delete" data-normal-label="削除" data-deleting-label="完了">削除</li>
+    </menu>
+  </div>
 <% end %>
 </div>

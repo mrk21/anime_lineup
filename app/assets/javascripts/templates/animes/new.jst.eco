@@ -1,0 +1,9 @@
+<% if @type == 'header': %>
+  <h2>アニメの追加</h2>
+  
+<% else if @type == 'body': %>
+  <%- @formTag '/animes', 'post', () -> %>
+    <p class="title" data-fields="title"></p>
+    <input type="submit" value="追加">
+  <% end %>
+<% end %>

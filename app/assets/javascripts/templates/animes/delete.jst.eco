@@ -1,0 +1,8 @@
+<% if @type == 'header': %>
+  <h2>"<%= @anime.get('title') %>"の削除</h2>
+  
+<% else if @type == 'body': %>
+  <%- @formTag "/animes/#{@anime.id}", 'delete', () => %>
+    <input type="submit" value="削除">
+  <% end %>
+<% end %>

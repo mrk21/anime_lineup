@@ -1,0 +1,58 @@
+#= require jquery
+#= require jquery_ujs
+#= require underscore/1.4.4
+#= require backbone/1.0
+#= require backbone.keys/backbone.keys
+#= require backbone-forms/distribution/backbone-forms.js
+#= require inflection-js/r38/inflection
+
+#= require_tree ./libs
+#= require_self
+#= require_tree ./models
+#= require_tree ./views
+#= require_tree ./routers
+#= require_tree ./helpers
+#= require_tree ./templates
+
+# create module
+@$$ = <%=
+  base_path = 'app/assets/javascripts'
+  base_position = base_path.split('/').size + 1
+  target_paths = %W(helpers models routers views).map{|path| "#{base_path}/#{path}/**/*/"}
+  
+  Dir.glob(target_paths).map do |paths|
+    modules = {}
+    current_module = modules
+    paths.split('/')[base_position..-1].each do |dir|
+      module_name = dir.classify
+      current_module[module_name] = {}
+      current_module = current_module[module_name]
+    end
+    modules
+  end.reduce({}) do |app_module, modules|
+    app_module.deep_merge(modules)
+  end.to_json
+%>
+
+# utils
+$$.reflection = (moduleName) ->
+  _(moduleName.split('.')).reduce(((Module, name) -> Module[name]), $$)
+
+$$.render = (path, params={}, options={}) ->
+  el = $('<div>').html(JST["templates/#{path}"](_($$.ApplicationHelper).extend(params)))
+  return el.html() if options.nowrap || el.children().size() < 2
+  $('<div>').append(el).html()
+
+$$.listenTo = (observer, subject, events) ->
+  events = events() if _(events).isFunction()
+  events = {} unless _(events).isObject()
+  _(events).each (handler, event) -> observer.listenTo(subject, event, handler)
+
+$$.boot = ->
+  $$.app = new $$.ApplicationView()
+  $('.-V').each ->
+    View = $$.reflection $(@).data('view-name')
+    $(@).data('view', new View(el: @))
+
+# boot
+$ $$.boot if typeof __NO_BOOT__ == 'undefined'

@@ -1,8 +1,6 @@
 class Airtime < ActiveRecord::Base
   belongs_to :anime
   belongs_to :channel
-  accepts_nested_attributes_for :anime
-  accepts_nested_attributes_for :channel
   
   DAYS = Hash[%W(sun mon tues wed thurs fri sat).each_with_index.map{|v,i| [v.intern, i]}]
   DAY_NAMES = DAYS.invert

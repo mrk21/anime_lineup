@@ -1,0 +1,13 @@
+<div class="dialog base <%= @class %>">
+  <section class="dialog <%= @class %>">
+    <header class="dialog <%= @class %>">
+      <%- @yield('header') %>
+    </header>
+    
+    <div class="dialog body <%= @class %>">
+      <%- @yield('body') %>
+    </div>
+  </section>
+  
+  <div class="dialog overlay <%= @class %>"></div>
+</div>

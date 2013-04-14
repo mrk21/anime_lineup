@@ -35,6 +35,7 @@ $link-list-divider-background-color: #5393c5;
   vertical-align: middle;
   color: #fff;
   padding: 0 20px;
+  font-size: 14px;
   
   &:hover {
     @include zurui-gradient-top-lighten(lighten($bgcolor, 5%));
@@ -107,6 +108,34 @@ $link-list-divider-background-color: #5393c5;
   }
 }
 
+@mixin action-menu($height) {
+  @include inline-block-list;
+  height: $height;
+  line-height: $height;
+  vertical-align: middle;
+  font-size: 14px;
+  white-space: nowrap;
+  
+  li {
+    @include zurui-gradient-top-lighten($header-base-color);
+    @include zurui-line-top;
+    @include zurui-ts-000;
+    color: #fff;
+    border-right: 1px solid darken($header-base-color, 10%);
+    text-align: center;
+    white-space: normal;
+    cursor: pointer;
+    
+    &:last-child {
+      border-right-color: transparent;
+    }
+    
+    &:hover {
+      @include zurui-gradient-top-lighten(lighten($header-base-color, 5%));
+    }
+  }
+}
+
 @mixin link-list($height: 50px) {
   margin: 0;
   padding: 0;
@@ -119,7 +148,19 @@ $link-list-divider-background-color: #5393c5;
     height: $height;
     line-height: $height;
     
-    &:last-child a {
+    @include zurui-gradient-top-lighten($link-list-background-color);
+    @include zurui-line-top;
+    display: block;
+    margin: 0;
+    padding: 0 15px;
+    text-decoration: none;
+    color: $page-base-color;
+    text-shadow: 0 1px 0 rgba(255,255,255,1);
+    font-weight: bold;
+    height: $height;
+    line-height: $height;
+    
+    &:last-child {
       @include zurui-line-bottom;
     }
     
@@ -130,18 +171,19 @@ $link-list-divider-background-color: #5393c5;
     }
     
     a {
-      @include zurui-gradient-top-lighten($link-list-background-color);
-      @include zurui-line-top;
       display: block;
-      margin: 0;
+      margin: 0 -15px;
       padding: 0 15px;
       text-decoration: none;
       color: $page-base-color;
-      text-shadow: 0 1px 0 rgba(255,255,255,1);
-      font-weight: bold;
       height: $height;
-      line-height: $height;
-      
+      p {
+        height: $height;
+        line-height: $height;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
       &:hover {
         @include zurui-gradient-top-lighten(darken($link-list-background-color, 5%));
       }
@@ -153,15 +195,17 @@ $link-list-divider-background-color: #5393c5;
     }
     
     &.divider {
+      @include zurui-ts-000;
       height: $height/2;
       line-height: $height/2;
+      background: $link-list-divider-background-color;
+      padding: 0 $page-base-w-padding;
+      color: #fff;
       
       a {
-        @include zurui-ts-000;
         height: $height/2;
-        line-height: $height/2;
-        background: $link-list-divider-background-color;
         display: block;
+        margin: 0 (-$page-base-w-padding);
         padding: 0 $page-base-w-padding;
         text-decoration: none;
         color: #fff;

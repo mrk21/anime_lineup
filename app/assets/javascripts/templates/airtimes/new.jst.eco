@@ -1,0 +1,9 @@
+<% if @type == 'header': %>
+  <h2>放送時間追加</h2>
+
+<% else if @type == 'body': %>
+  <p class="day" data-fields="day"></p>
+  <p class="start_time_str" data-fields="start_time_str"></p>
+  <p class="channel_id" data-fields="channel_id"></p>
+  <button type="button">追加</button>
+<% end %>
