@@ -117,7 +117,7 @@ class Animemap::Lineup < ActiveResource::Base
         state = Airtime::STATE_NEW
       when :onair then
         start_date = airtime.start_date
-        start_date = Date.today if start_date.blank?
+        start_date = Airtime.today if start_date.blank?
         state = Airtime::STATE_ON_AIR
       end
       

@@ -19,6 +19,10 @@ class Airtime < ActiveRecord::Base
     where(:day=> self.days(day).nil? ? day : self.days(day))
   }
   
+  def self.today
+    Date.today - (1.0/24*4)
+  end
+  
   def self.days(key=nil)
     key.nil? ? DAYS : DAYS[key.to_s.intern]
   end

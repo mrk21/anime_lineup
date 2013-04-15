@@ -25,7 +25,7 @@ module LineupsHelper
   
   def airtime_state_class(airtime)
     case airtime.state
-      when Airtime::STATE_NEW then airtime.start_date == Date.today ? 'first-air' : 'new'
+      when Airtime::STATE_NEW then airtime.start_date == Airtime.today ? 'first-air' : 'new'
       when Airtime::STATE_ON_AIR then 'on-air'
       when Airtime::STATE_FINISH then 'finish'
     end
