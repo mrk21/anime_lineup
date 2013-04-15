@@ -1,0 +1,9 @@
+<p class="rating base">
+  <input type="hidden">
+  <span data-index="0">★</span
+ ><span data-index="1">★</span
+ ><span data-index="2">★</span
+ ><span data-index="3">★</span
+ ><span data-index="4">★</span
+ ><span data-index="5">★</span>
+</p>

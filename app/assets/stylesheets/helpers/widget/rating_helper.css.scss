@@ -1,0 +1,12 @@
+@mixin rating($base-color: #ccc, $active-color: #fa0) {
+  span {
+    cursor: pointer;
+    color: $base-color;
+    &.active {
+      color: $active-color;
+    }
+    &[data-index="0"] {
+      @include opacity(0);
+    }
+  }
+}

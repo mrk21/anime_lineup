@@ -1,0 +1,6 @@
+@import "application_helper";
+@import "widget/dialog_helper";
+
+div.dialog.base {
+  @include dialog;
+}

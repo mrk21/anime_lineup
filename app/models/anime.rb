@@ -13,7 +13,7 @@ class Anime < ActiveRecord::Base
   IMAGE_THUMBNAIL_SIZE = 250
   IMAGE_BASE_PATH = File.join(Rails.root, 'tmp/cache/images')
   
-  scope :ordered , lambda{ order [:rating,:title] }
+  scope :ordered , lambda{ order ['rating desc',:title] }
   scope :enabled , lambda{ where :enable=>1 }
   scope :disabled, lambda{ where :enable=>0 }
   

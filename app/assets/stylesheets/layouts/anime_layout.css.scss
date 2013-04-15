@@ -1,6 +1,7 @@
 @import "application_helper";
 @import "airtime_helper";
 @import "widget/dialog_helper";
+@import "widget/rating_helper";
 
 $anime-list-width: 300px;
 $anime-list-nav-height: 40px;
@@ -84,7 +85,20 @@ div.anime.list {
             }
           }
           &.title {
+            margin-top: 15px;
+            line-height: 1.5;
+            height: auto;
+            vertical-align: top;
             width: $anime-list-width - $thumbnail-size - 2*$page-base-w-padding - 1px;
+          }
+          &.rating.base {
+            position: absolute;
+            left: $thumbnail-size;
+            bottom: 10px;
+            line-height: 1.5;
+            height: auto;
+            white-space: normal;
+            vertical-align: bottom;
           }
         }
         &:hover p.thumbnail img {
@@ -114,11 +128,18 @@ div.anime.detail {
     
     h2 {
       margin-left: 25px;
+      padding-right: 0;
     }
     p.enable {
       position: absolute;
       top: -1px;
       left: $page-base-w-padding;
+    }
+    div.rating {
+      @include inline-block;
+      p.rating.base {
+        @include rating(#fff);
+      }
     }
     nav {
       position: absolute;

@@ -1,0 +1,6 @@
+@import "application_helper";
+@import "widget/rating_helper";
+
+p.rating.base {
+  @include rating;
+}

@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 module AnimesHelper
   def anime_init
     @_airtime_groups = @anime.airtimes_under_enabled_channels.group_by{|r| r.day_name}
@@ -45,5 +47,13 @@ module AnimesHelper
     options[:allowfullscreen] ||= ''
     options[:src] = video_anime_path(anime, options.delete(:url_params))
     content_tag :iframe, nil, options
+  end
+  
+  def rating_tag(anime)
+    r = anime.rating || 0
+    items = 6.times.map do |i|
+      content_tag(:span, '★', 'data-index'=>i, :class=> (i<=r ? :active : ''))
+    end
+    raw content_tag(:p, raw(items.join), :class=>'rating base')
   end
 end
