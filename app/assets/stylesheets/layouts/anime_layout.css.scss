@@ -8,6 +8,7 @@ $anime-list-nav-height: 40px;
 $anime-list-menu-height: 40px;
 $anime-summary-height: 40px;
 $anime-airtime-list-width: 270px;
+$anime-search-height: 40px;
 
 div.anime.list {
   @include zurui-line-right;
@@ -32,6 +33,10 @@ div.anime.list {
       li {
         width: $anime-list-width / 3;
       }
+    }
+    
+    p.search {
+      display: none;
     }
   }
   
@@ -109,6 +114,51 @@ div.anime.list {
       &.current:hover p.thumbnail img {
         @include opacity(1);
       }
+    }
+  }
+  
+  &.search {
+    nav {
+      p.search {
+        @include zurui-gradient-top-lighten($header-base-color);
+        @include zurui-line-top;
+        @include zurui-ts-000;
+        margin: 0;
+        padding: 0;
+        display: block;
+        position: absolute;
+        left: 0;
+        top: $anime-list-nav-height + 1px;
+        height: $anime-search-height;
+        width: $anime-list-width + 1px;
+        line-height: $anime-search-height;
+        vertical-align: middle;
+        text-align: center;
+        
+        input {
+          @include inline-block;
+          @include appearance(none);
+          @include border-radius(15px);
+          @include box-shadow(inset 0 1px 5px rgba(0,0,0,0.25));
+          position: relative;
+          left: -1px;
+          border: 1px solid rgba(0,0,0,0.8);
+          background: #fff;
+          text-align: left;
+          width: $anime-list-width - 49px;
+          height: $anime-search-height - 22px;
+          line-height: $anime-search-height - 20px;
+          padding: 3px 12px;
+          font-size: 14px;
+          
+          &:focus {
+            outline: 0;
+          }
+        }
+      }
+    }
+    ul.list {
+      top: $anime-list-nav-height + $anime-search-height + 1px;
     }
   }
 }

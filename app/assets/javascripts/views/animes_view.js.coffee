@@ -26,6 +26,11 @@ class $$.AnimesView extends Backbone.View
   events:
     'click .AnimesView-new': 'new'
     'click .AnimesView-delete': 'delete'
+    'keyup .AnimesView-search': 'onSearch'
+  
+  applicationEvents: =>
+    'keypress-alt+f': @onEnableSearchKey
+    'keypress-esc': @onDisableSearchKey
   
   initialize: ->
     super()
@@ -37,6 +42,7 @@ class $$.AnimesView extends Backbone.View
     @deleteDialog = new $$.Widget.DialogView
       class: 'animes delete'
       yield: @yieldDeleteDialog
+    $$.listenTo(@, $$.app, @applicationEvents)
   
   new: =>
     @anime = new $$.AnimesModel()
@@ -45,6 +51,29 @@ class $$.AnimesView extends Backbone.View
   delete: =>
     @anime = new $$.AnimesModel(@list.currentItem())
     @deleteDialog.show()
+  
+  onEnableSearchKey: =>
+    @isEnableSearch = true
+    @$el.addClass('search')
+    setTimeout (=> @$('.AnimesView-search').focus()), 200
+  
+  onDisableSearchKey: =>
+    return unless @isEnableSearch
+    @isEnableSearch = false
+    @$el.removeClass('search')
+    @list.$('li').show()
+  
+  search: (word) ->
+    word = $$.hiraganaToKatakana(word).toLowerCase()
+    @list.$('li').each ->
+      title = $$.hiraganaToKatakana($(@).data('title')).toLowerCase()
+      if title.search(word) < 0 then $(@).hide() else $(@).show()
+  
+  onSearch: (ev) =>
+    word = $(ev.target).val()
+    return if @activeSearchWord == word
+    @activeSearchWord = word
+    @search @activeSearchWord
   
   renderNewFrom: (view, content) =>
     @newForm = new NewFromView(dialog: view, model: @anime, template: _.template(content))

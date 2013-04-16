@@ -54,5 +54,8 @@ $$.boot = ->
     View = $$.reflection $(@).data('view-name')
     $(@).data('view', new View(el: @))
 
+$$.hiraganaToKatakana = (str) ->
+  str.replace /[ぁ-ん]/g, (s) -> String.fromCharCode(s.charCodeAt(0) + 0x60)
+
 # boot
 $ $$.boot if typeof __NO_BOOT__ == 'undefined'

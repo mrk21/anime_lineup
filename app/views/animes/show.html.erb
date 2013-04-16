@@ -7,6 +7,9 @@
      ><li class="<%= :current if params[:state].to_s.intern == :enabled %>"><%= link_to '有効', animes_path(:state=>:enabled) %></li
      ><li class="<%= :current if params[:state].to_s.intern == :disabled %>"><%= link_to '無効', animes_path(:state=>:disabled) %></li>
     </ul>
+    <p class="search">
+      <input class="AnimesView-search" type="search">
+    </p>
   </nav>
   
   <ul class="list">
