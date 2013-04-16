@@ -1,5 +1,5 @@
 <% if @withDivider: %>
-  <li class="divider" data-day="<%= @airtime.get('day') %>"><%= @airtime.dayName() %></li>
+  <li class="divider" data-day="<%= @airtime.get('day') %>"><%= @airtime.dayLabel() %></li>
 <% end %>
 
 <% name = (key) => "anime[airtimes_attributes][#{@i}][#{key}]" %>

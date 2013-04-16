@@ -2,8 +2,8 @@ class $$.ApplicationView extends Backbone.View
   el: 'body'
   
   keys:
-    'return esc left right up down': 'onKeyPress'
-    'f+alt': 'onAltKeyPress'
+    'return esc': 'onKeyPress'
+    'f+alt left+alt right+alt space+alt': 'onAltKeyPress'
   
   onKeyPress: (event, name) =>
     @trigger("keypress-#{name}", event, name)

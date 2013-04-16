@@ -1,6 +1,7 @@
 class $$.AirtimesModel extends Backbone.Model
   START_TIME_REGEXP = /^(\d{1,2}):(\d{1,2})$/
-  DAY_NAMES = ['日','月','火','水','木','金','土']
+  DAY_LABELS = ['日','月','火','水','木','金','土']
+  DAY_NAMES = ['sun','mon','tues','wed','thurs','fri','sat']
   
   @dayNames: (day) ->
     if _.isUndefined(day)
@@ -8,8 +9,17 @@ class $$.AirtimesModel extends Backbone.Model
     else
       DAY_NAMES[day-0]
   
+  @dayLables: (day) ->
+    if _.isUndefined(day)
+      DAY_LABELS
+    else
+      DAY_LABELS[day-0]
+  
   dayName: ->
     @constructor.dayNames(@get('day'))
+  
+  dayLabel: ->
+    @constructor.dayLables(@get('day'))
   
   channel: ->
     @channels.get(@get('channel_id'))
@@ -37,7 +47,7 @@ class $$.AirtimesModel extends Backbone.Model
       options: @channels.map (v) -> {val: v.id, label: v.get('name')}
     day:
       type: 'Select'
-      options: _(@constructor.dayNames()).map (v,i) -> {val: i, label: v}
+      options: _(@constructor.dayLables()).map (v,i) -> {val: i, label: v}
     start_time:
       type: 'Number'
     start_time_str:
