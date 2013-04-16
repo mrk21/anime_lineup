@@ -4,9 +4,13 @@ class $$.ApplicationView extends Backbone.View
   keys:
     'return esc': 'onKeyPress'
     'f+alt left+alt right+alt space+alt': 'onAltKeyPress'
+    '1+alt 2+alt 3+alt': 'onGlobalMenuKeyPress'
   
-  onKeyPress: (event, name) =>
-    @trigger("keypress-#{name}", event, name)
+  onKeyPress: (ev,name) =>
+    @trigger("keypress-#{name}", ev,name)
   
-  onAltKeyPress: (event, name) =>
-    @onKeyPress(event, "alt+#{name}")
+  onAltKeyPress: (ev,name) =>
+    @onKeyPress(ev, "alt+#{name}")
+  
+  onGlobalMenuKeyPress: (ev,name) =>
+    @$('header.page nav.main li a').get(name-1).click()
