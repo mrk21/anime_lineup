@@ -20,7 +20,7 @@ class Airtime < ActiveRecord::Base
   }
   
   def self.today
-    Date.today - (1.0/24*4)
+    Time.now - 4.hour
   end
   
   def self.days(key=nil)
