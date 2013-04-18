@@ -22,7 +22,7 @@ class $$.Widget.RatingView extends Backbone.View
   
   increment: ->
     val = @input.val()-0
-    return if val > 5
+    return if val >= 5
     @set val+1, true
   
   decrement: ->
