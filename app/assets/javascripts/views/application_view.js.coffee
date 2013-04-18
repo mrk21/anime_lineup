@@ -3,7 +3,7 @@ class $$.ApplicationView extends Backbone.View
   
   keys:
     'return esc left right up down': 'onKeyPress'
-    'f+alt left+alt right+alt space+alt s+alt': 'onAltKeyPress'
+    'f+alt left+alt right+alt space+alt s+alt e+alt': 'onAltKeyPress'
     '1+alt 2+alt 3+alt': 'onGlobalMenuKeyPress'
   
   onKeyPress: (ev,name) =>

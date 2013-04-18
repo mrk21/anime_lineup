@@ -36,6 +36,7 @@ class $$.AnimesView extends Backbone.View
     'keypress-down': @onKeyDown
     'keypress-alt+space': @onFetch
     'keypress-alt+s': @onSave
+    'keypress-alt+e': @onSetEnable
     'keypress-right': @onKeyRight
     'keypress-left': @onKeyLeft
   
@@ -51,6 +52,9 @@ class $$.AnimesView extends Backbone.View
       yield: @yieldDeleteDialog
     @active = @list.currentItem()
     $$.listenTo(@, $$.app, @applicationEvents)
+  
+  enable: =>
+    $("input[type='checkbox'][name='anime[enable]']")
   
   rating: =>
     $(".-V[data-view-name='Widget.RatingView']").data('view')
@@ -138,6 +142,10 @@ class $$.AnimesView extends Backbone.View
   
   onKeyLeft: (ev) =>
     @rating().decrement()
+  
+  onSetEnable: (ev) =>
+    el = @enable()
+    el[0].checked = !el[0].checked
   
   yieldNewDialog: (type) =>
     $$.render('animes/new', type: type)
