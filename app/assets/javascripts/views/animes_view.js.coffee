@@ -35,6 +35,9 @@ class $$.AnimesView extends Backbone.View
     'keypress-up': @onKeyUp
     'keypress-down': @onKeyDown
     'keypress-alt+space': @onFetch
+    'keypress-alt+s': @onSave
+    'keypress-right': @onKeyRight
+    'keypress-left': @onKeyLeft
   
   initialize: ->
     super()
@@ -46,8 +49,11 @@ class $$.AnimesView extends Backbone.View
     @deleteDialog = new $$.Widget.DialogView
       class: 'animes delete'
       yield: @yieldDeleteDialog
-    $$.listenTo(@, $$.app, @applicationEvents)
     @active = @list.currentItem()
+    $$.listenTo(@, $$.app, @applicationEvents)
+  
+  rating: =>
+    $(".-V[data-view-name='Widget.RatingView']").data('view')
   
   new: =>
     @anime = new $$.AnimesModel()
@@ -119,10 +125,19 @@ class $$.AnimesView extends Backbone.View
     location.href = @active.find('a')[0].href if @active
     false
   
+  onSave: (ev) =>
+    $('.anime.detail form')[0].submit()
+  
   renderNewFrom: (view, content) =>
     @newForm = new NewFromView(dialog: view, model: @anime, template: _.template(content))
     @newForm.render()
     @newForm.el
+  
+  onKeyRight: (ev) =>
+    @rating().increment()
+  
+  onKeyLeft: (ev) =>
+    @rating().decrement()
   
   yieldNewDialog: (type) =>
     $$.render('animes/new', type: type)
