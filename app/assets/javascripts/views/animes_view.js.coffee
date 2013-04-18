@@ -64,9 +64,9 @@ class $$.AnimesView extends Backbone.View
     @list.$('li').show()
   
   search: (word) ->
-    word = $$.hiraganaToKatakana(word).toLowerCase()
+    word = StringNormalizer.exec word
     @list.$('li').each ->
-      title = $$.hiraganaToKatakana($(@).data('title')).toLowerCase()
+      title = StringNormalizer.exec $(@).data('title')
       if title.search(word) < 0 then $(@).hide() else $(@).show()
   
   onSearch: (ev) =>
