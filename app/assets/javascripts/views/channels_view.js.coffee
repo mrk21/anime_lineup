@@ -43,7 +43,7 @@ class $$.ChannelsView extends Backbone.View
     @newDialog.show()
   
   delete: =>
-    @channel = new $$.ChannelsModel(@list.currentItem())
+    @channel = new $$.ChannelsModel(@list.currentItem().data())
     @deleteDialog.show()
   
   renderNewFrom: (view, content) =>

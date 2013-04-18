@@ -185,7 +185,7 @@ $link-list-divider-background-color: #5393c5;
         text-overflow: ellipsis;
       }
       &:hover {
-        @include zurui-gradient-top-lighten(darken($link-list-background-color, 5%));
+        @include zurui-gradient-top-lighten(darken($link-list-background-color, 10%));
       }
     }
     &.current a, &.current a:hover {
