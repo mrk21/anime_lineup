@@ -39,6 +39,9 @@ class $$.AnimesView extends Backbone.View
     'keypress-alt+e': @onSetEnable
     'keypress-right': @onKeyRight
     'keypress-left': @onKeyLeft
+    'keypress-alt+shift+1': @onSubMenuKey
+    'keypress-alt+shift+2': @onSubMenuKey
+    'keypress-alt+shift+3': @onSubMenuKey
   
   initialize: ->
     super()
@@ -146,6 +149,9 @@ class $$.AnimesView extends Backbone.View
   onSetEnable: (ev) =>
     el = @enable()
     el[0].checked = !el[0].checked
+  
+  onSubMenuKey: (ev, name, baseName) =>
+    location.href = @$('nav li a')[baseName-1].href
   
   yieldNewDialog: (type) =>
     $$.render('animes/new', type: type)
