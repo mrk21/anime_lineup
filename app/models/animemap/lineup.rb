@@ -92,7 +92,6 @@ class Animemap::Lineup < ActiveResource::Base
   
   def self.import
     records = self.find_by_region(:ibaraki)
-    fetch_airtimes = []
     new_animes = []
     
     records.each do |record|
@@ -114,28 +113,19 @@ class Animemap::Lineup < ActiveResource::Base
       case record.state.to_s.intern
       when :new then
         start_date = Date.parse(record.next)
-        state = Airtime::STATE_NEW
       when :onair then
         start_date = airtime.start_date
         start_date = Airtime.today if start_date.blank?
-        state = Airtime::STATE_ON_AIR
       end
       
       airtime.update_attributes(
         :day=> self.days(record.week),
         :start_time=> start_time,
         :start_date=> start_date,
-        :state=> state,
       )
-      fetch_airtimes << airtime
       print '.'
     end
     puts
-    
-    Airtime.update_all(
-      "state = #{Airtime::STATE_FINISH}",
-      "id NOT IN (#{fetch_airtimes.map{|v| v.id}.join(',')})"
-    ) unless fetch_airtimes.blank?
     
     threads = new_animes.uniq.map do |anime|
       puts anime.title

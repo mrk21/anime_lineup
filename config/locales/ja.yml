@@ -9,3 +9,7 @@ ja:
   thurs: 木
   fri: 金
   sat: 土
+  
+  new: '新規'
+  on_air: '放送中'
+  finish: '放送終了'

@@ -2,6 +2,7 @@
   $delete-width: 70px;
   $time-width: 70px;
   $check-width: 50px;
+  $start-time-width: 120px;
   @include link-list;
   
   li {
@@ -75,19 +76,39 @@
             
           }
         }
+        &.start_date {
+          @include zurui-gradient-top-lighten($link-list-background-color);
+          @include zurui-line-left;
+          display: none;
+          position: absolute;
+          z-index: 3;
+          top: 0;
+          right: $delete-width;
+          width: $start-time-width;
+          text-align: center;
+          
+          input {
+            text-align: left;
+            width: $start-time-width - 30px;
+            font-size: 12px;
+          }
+        }
       }
       
-      &.new, &.new p.check, &.new p.delete {
+      &.new, &.new p.check, &.new p.delete, &.new p.start_date {
         @include zurui-gradient-top-lighten(#ffffaa);
       }
     }
   }
   
-  &.delete li.item p {
+  &.edit li.item p {
+    &.name {
+      margin-right: $delete-width + $start-time-width;
+    }
     &.check {
       display: none;
     }
-    &.delete {
+    &.delete, &.start_date {
       display: block;
     }
   }

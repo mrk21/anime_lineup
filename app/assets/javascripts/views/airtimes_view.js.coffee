@@ -32,7 +32,7 @@ class NewFromView extends Backbone.Form
 class $$.AirtimesView extends Backbone.View
   events:
     'click .AirtimesView-new': 'new'
-    'click .AirtimesView-delete': 'delete'
+    'click .AirtimesView-edit': 'edit'
     'click .AirtimesView-delete-item': 'deleteItem'
   
   newFormEvents: =>
@@ -51,16 +51,18 @@ class $$.AirtimesView extends Backbone.View
     @airtime.channels = @channels
     @newDialog.show()
   
-  delete: (event) =>
-    if @isDelete
-      @isDelete = false
-      @$el.removeClass('delete')
-      @$('.list').removeClass('delete')
+  edit: (event) =>
+    if @isEdit
+      @isEdit = false
+      $('.anime.detail').removeClass('edit')
+      @$el.removeClass('edit')
+      @$('.list').removeClass('edit')
       $(event.target).text($(event.target).data('normal-label'))
     else
-      @isDelete = true
-      @$el.addClass('delete')
-      @$('.list').addClass('delete')
+      @isEdit = true
+      $('.anime.detail').addClass('edit')
+      @$el.addClass('edit')
+      @$('.list').addClass('edit')
       $(event.target).text($(event.target).data('deleting-label'))
   
   deleteItem: (event) =>

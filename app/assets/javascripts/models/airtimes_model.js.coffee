@@ -15,6 +15,16 @@ class $$.AirtimesModel extends Backbone.Model
     else
       DAY_LABELS[day-0]
   
+  @today: ->
+    date = new Date()
+    date.setHours(date.getHours()-4)
+    date.format = -> [
+      ('00'+ @getFullYear()).substr(-4,4),
+      ('00'+ (@getMonth()+1)).substr(-2,2),
+      ('00'+ @getDate()).substr(-2,2),
+    ].join('-')
+    date
+  
   dayName: ->
     @constructor.dayNames(@get('day'))
   
@@ -37,9 +47,11 @@ class $$.AirtimesModel extends Backbone.Model
     delete @attributes.start_time_str
     @attributes.start_time = (matches[1]-0)*60 + (matches[2]-0)
   
-  defaults:
-    state: 1
+  defaults: =>
+    today = @constructor.today()
     enable: 1
+    day: today.getDay()
+    start_date: today.format()
   
   schema: ->
     channel_id:
@@ -60,4 +72,13 @@ class $$.AirtimesModel extends Backbone.Model
           return error unless matches
           return error if parseInt(matches[1]) < 0 || parseInt(matches[1]) > 28
           return error if parseInt(matches[2]) < 0 || parseInt(matches[2]) > 59
+      ]
+    start_date:
+      type: 'Text'
+      validators: [
+        'required',
+        (value, formValues) ->
+          error = {type: 'start_date', message: 'Invalid Format'}
+          matches = value.match(/^(\d+)-(\d+)-(\d+)$/)
+          return error unless matches
       ]

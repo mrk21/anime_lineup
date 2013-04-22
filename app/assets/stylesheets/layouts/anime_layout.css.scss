@@ -8,6 +8,7 @@ $anime-list-nav-height: 40px;
 $anime-list-menu-height: 40px;
 $anime-summary-height: 40px;
 $anime-airtime-list-width: 270px;
+$anime-edit-airtime-list-width: 400px;
 $anime-search-height: 40px;
 
 div.anime.list {
@@ -183,6 +184,10 @@ div.anime.detail {
   margin-top: $anime-summary-height;
   margin-right: $anime-airtime-list-width + 1px;
   
+  &.edit {
+    margin-right: $anime-edit-airtime-list-width + 1px;
+  }
+  
   div.summary {
     @include detail-header($anime-summary-height);
     position: fixed;
@@ -288,14 +293,16 @@ div.anime.detail {
       }
     }
     
-    &.delete {
+    &.edit {
+      width: $anime-edit-airtime-list-width;
+      
       menu {
         li {
           &.new {
             display: none;
           }
-          &.delete {
-            width: $anime-airtime-list-width;
+          &.edit {
+            width: $anime-edit-airtime-list-width;
           }
         }
       }
@@ -339,7 +346,7 @@ div.animes.delete.dialog.base {
 }
 
 div.airtimes.new.dialog.base {
-  @include dialog(402px,95px);
+  @include dialog(502px,95px);
   section.dialog {
     label { display: none; }
     div[data-error] { display: none; }
@@ -360,6 +367,10 @@ div.airtimes.new.dialog.base {
       }
       &.channel_id select {
         width: 150px;
+      }
+      &.start_date input {
+        width: 90px;
+        font-size: 12px;
       }
     }
     button {

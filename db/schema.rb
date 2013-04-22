@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130422063841) do
+ActiveRecord::Schema.define(:version => 20130422134107) do
 
   create_table "airtimes", :force => true do |t|
     t.integer "anime_id"
@@ -19,7 +19,6 @@ ActiveRecord::Schema.define(:version => 20130422063841) do
     t.integer "day"
     t.integer "start_time"
     t.date    "start_date"
-    t.integer "state",      :default => 0
     t.integer "enable",     :default => 1
   end
 
@@ -33,7 +32,7 @@ ActiveRecord::Schema.define(:version => 20130422063841) do
   create_table "animes", :force => true do |t|
     t.string  "title"
     t.text    "description"
-    t.integer "rating"
+    t.integer "rating",      :default => 0
     t.string  "site_url"
     t.string  "image_url"
     t.string  "video_url"

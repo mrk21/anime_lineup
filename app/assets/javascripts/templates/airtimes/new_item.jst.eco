@@ -5,7 +5,6 @@
 <% name = (key) => "anime[airtimes_attributes][#{@i}][#{key}]" %>
 <li class="new item">
   <input name="<%= name('day') %>" type="hidden" value="<%= @airtime.get('day') %>">
-  <input name="<%= name('state') %>" type="hidden" value="<%= @airtime.get('state') %>">
   <p class="time">
     <%= @airtime.formatted_start_time() %>
     <input name="<%= name('start_time') %>" type="hidden" value="<%= @airtime.get('start_time') %>">
@@ -13,6 +12,9 @@
   <p class="name">
     <%= @airtime.channel().get('name') %>
     <input name="<%= name('channel_id') %>" type="hidden" value="<%= @airtime.get('channel_id') %>">
+  </p>
+  <p class="start_date">
+    <input name="<%= name('start_date') %>" type="text" value="<%= @airtime.get('start_date') %>">
   </p>
   <p class="check">
     <input name="<%= name('enable') %>" type="hidden" value="0">
