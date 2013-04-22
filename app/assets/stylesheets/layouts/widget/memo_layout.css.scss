@@ -44,8 +44,8 @@ div.memo.base {
       textarea {
         margin: 0;
         padding: 0;
-        height: $height - 2*$page-base-w-padding;
-        width: $width - 2*$page-base-w-padding;
+        height: $height - 2*$page-base-w-padding - 2px;
+        width: $width - 2*$page-base-w-padding - 2px;
         resize: none;
       }
       label {
