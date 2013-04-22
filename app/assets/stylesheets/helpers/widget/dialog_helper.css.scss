@@ -9,6 +9,7 @@
   section.dialog {
     $header-height: 35px;
     @include box-shadow(0 2px 3px rgba(0,0,0,0.75));
+    @include border-radius(3px);
     position: fixed;
     z-index: 2;
     top: 50%;

@@ -104,7 +104,7 @@ class $$.AnimesView extends Backbone.View
       @active = element 
       @active = @list.items(':first') if @active.size() == 0
     else
-      @active = $()
+      @active = @list.items(':first')
   
   onSelect: (ev) =>
     @select $(ev.target).closest('li')
@@ -129,7 +129,7 @@ class $$.AnimesView extends Backbone.View
   
   onFetch: (ev) =>
     ev.preventDefault()
-    location.href = @active.find('a')[0].href if @active
+    location.href = @active.find('a')[0].href unless @active.size() == 0
     false
   
   onSave: (ev) =>

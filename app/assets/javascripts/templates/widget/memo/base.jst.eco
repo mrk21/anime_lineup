@@ -1,0 +1,8 @@
+<div class="memo base">
+  <div class="memo balloon"></div>
+  <section class="memo">
+    <div class="memo body">
+      <p class="memo" data-fields="memo"></p>
+    </div>
+  </section>
+</div>

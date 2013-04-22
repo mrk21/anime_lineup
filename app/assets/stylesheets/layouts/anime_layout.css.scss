@@ -206,6 +206,16 @@ div.anime.detail {
         @include rating(#fff);
       }
     }
+    p.memo {
+      margin-left: 5px;
+      font-size: 12px;
+      button {
+        @include appearance(none);
+        border: none;
+        background: none;
+        color: #fff;
+      }
+    }
     nav {
       position: absolute;
       top: 0;

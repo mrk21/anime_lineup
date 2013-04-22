@@ -37,6 +37,7 @@
     <div class="rating -V" data-view-name="Widget.RatingView" data-name="anime[rating]" data-value="<%= @anime.rating %>">
       <%= rating_tag(@anime) %>
     </div>
+    <p class="memo -V" data-view-name="Widget.MemoView"><button type="button">メモ</button><%= f.hidden_field :memo %></p>
     <p class="enable"><%= f.check_box :enable %></p>
     <nav><%= f.submit '保存' %></nav>
   </div>

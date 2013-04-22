@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130402121241) do
+ActiveRecord::Schema.define(:version => 20130422063841) do
 
   create_table "airtimes", :force => true do |t|
     t.integer "anime_id"
@@ -38,6 +38,7 @@ ActiveRecord::Schema.define(:version => 20130402121241) do
     t.string  "image_url"
     t.string  "video_url"
     t.integer "enable",      :default => 1
+    t.text    "memo"
   end
 
   add_index "animes", ["rating"], :name => "index_animes_on_rating"

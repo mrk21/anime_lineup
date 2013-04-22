@@ -3,9 +3,9 @@ class $$.ApplicationView extends Backbone.View
   
   keys:
     'return esc': 'onKeyPress'
-    'left right up down': 'onKeyPress'
+    'left right up down': 'onKeyPressWithoutTextarea'
     
-    'f+alt space+alt s+alt e+alt': 'onAltKeyPress'
+    'f+alt space+alt s+alt e+alt m+alt': 'onAltKeyPress'
     'left+alt right+alt': 'onAltKeyPress'
     '1+alt 2+alt 3+alt': 'onGlobalMenuKeyPress'
     
@@ -14,6 +14,10 @@ class $$.ApplicationView extends Backbone.View
   onKeyPress: (ev,name,baseName) =>
     baseName ||= name
     @trigger("keypress-#{name}", ev, name, baseName)
+  
+  onKeyPressWithoutTextarea: (ev,name) =>
+    return unless $(ev.target).filter('textarea').size() == 0
+    @onKeyPress(ev, name, name)
   
   onAltKeyPress: (ev,name) =>
     return if ev.shiftKey
