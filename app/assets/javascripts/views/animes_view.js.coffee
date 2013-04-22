@@ -113,7 +113,7 @@ class $$.AnimesView extends Backbone.View
     ev.preventDefault()
     to = @active
     to = to.prevAll('li:not(.no-match)').eq(0) if to
-    to = @list.items(':not(.no-match)').eq(-1) if $(to).size() == 0
+    return false if $(to).size() == 0
     @select to
     @list.el.scrollTop = @active[0].offsetTop
     false
@@ -122,7 +122,7 @@ class $$.AnimesView extends Backbone.View
     ev.preventDefault()
     to = @active
     to = to.nextAll('li:not(.no-match)').eq(0) if to
-    to = @list.items(':not(.no-match)').eq(0) if $(to).size() == 0
+    return false if $(to).size() == 0
     @select to
     @list.el.scrollTop = @active[0].offsetTop
     false

@@ -19,7 +19,7 @@ class $$.ApplicationView extends Backbone.View
     return if ev.shiftKey
     @onKeyPress(ev, "alt+#{name}", name)
   
-  onAltShiftKey: (ev,name)=>
+  onAltShiftKey: (ev,name) =>
     @onKeyPress(ev, "alt+shift+#{name}", name)
   
   onGlobalMenuKeyPress: (ev,name) =>
