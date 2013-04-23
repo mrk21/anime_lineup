@@ -16,7 +16,7 @@
       <tr>
         <th class="time"><span>&nbsp;<span></th>
         <% @channels.each do |channel| %>
-          <th><span><a href="<%= channel_path(channel.id) %>">
+          <th><span><a href="<%= channel_path(channel.id, :state=>:enabled) %>">
             <p class="name"><%= channel.name %></p>
             <% unless channel.no.blank? then %>
               <p class="no"><b><%= channel.no %></b>ch</p>
@@ -33,7 +33,7 @@
         <% @channels.each do |channel| %>
           <td>
           <% current_airtimes(channel.id, time).each do |airtime| %>
-            <a href="<%= anime_path(airtime.anime.id) %>" id="airtime_<%= airtime.id %>" class="airtime <%= airtime_state_class(airtime) %>">
+            <a href="<%= anime_path(airtime.anime.id, :state=>:enabled) %>" id="airtime_<%= airtime.id %>" class="airtime <%= airtime_state_class(airtime) %>">
               <p class="time"><%= "%02d" % airtime.start_time_m %></p>
               <p class="title"><%= airtime.anime.title %></p>
             </a>

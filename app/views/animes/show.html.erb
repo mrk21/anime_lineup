@@ -61,7 +61,7 @@
         <%= f.fields_for :airtimes, airtime do |af| %>
           <li class="item">
             <p class="time"><%= link_to format_time(airtime.start_time), lineup_path(airtime.day_name)+"#airtime_#{airtime.id}" %></p>
-            <p class="name"><%= link_to airtime.channel.name, channel_path(airtime.channel, :state=>:all)+"#airtime_#{airtime.id}" %></p>
+            <p class="name"><%= link_to airtime.channel.name, channel_path(airtime.channel, :state=>:enabled)+"#airtime_#{airtime.id}" %></p>
             <p class="start_date"><%= af.text_field :start_date %></p>
             <p class="check"><%= af.check_box :enable %></p>
             <p class="delete"><button type="button" class="AirtimesView-delete-item">削除<%= af.hidden_field :_destroy %></button></p>
