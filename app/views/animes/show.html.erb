@@ -8,7 +8,7 @@
      ><li class="<%= :current if params[:state].to_s.intern == :disabled %>"><%= link_to '無効', animes_path(:state=>:disabled) %></li>
     </ul>
     <p class="search">
-      <input class="AnimesView-search" type="search">
+      <input class="AnimesView-search" type="search" data-enabled-shortcutkey="up,down">
     </p>
   </nav>
   
