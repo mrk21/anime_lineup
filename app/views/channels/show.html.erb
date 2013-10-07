@@ -52,7 +52,7 @@
   </ul>
   
   <ul class="anime-list"
-  <% @channel.enabled_animes.each do |anime| %>
+  <% @channel.enabled_animes.ordered.each do |anime| %>
     ><li><%= link_to image_tag(thumbnail_anime_path(anime)), anime_path(anime, :state=>:enabled), :title=>anime.title %></li
   <% end %>
   ></ul>

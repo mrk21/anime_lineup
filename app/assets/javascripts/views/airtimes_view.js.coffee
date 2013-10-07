@@ -93,5 +93,5 @@ class $$.AirtimesView extends Backbone.View
       )
     else
       divider.after(
-        $$.render('airtimes/new_item', airtime: @airtime, i: items.size())
+        $$.render('airtimes/new_item', airtime: @airtime, i: items.size(), withDivider: false)
       )

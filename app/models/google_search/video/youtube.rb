@@ -12,6 +12,6 @@ class GoogleSearch::Video::Youtube < GoogleSearch::Video
     return nil if uri.blank?
     video_id = uri.sub(/^http:\/\/youtube.googleapis.com\/v\/([^&?]+).*$/,'\1')
     return nil if video_id.blank?
-    "http://www.youtube-nocookie.com/embed/#{video_id}?rel=0"
+    "https://www.youtube-nocookie.com/embed/#{video_id}?rel=0"
   end
 end

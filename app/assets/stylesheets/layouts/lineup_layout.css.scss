@@ -34,11 +34,13 @@ table.lineup {
   }
   th, td {
     min-width: 100px;
+    max-width: 100px;
     padding: 0 5px;
     border: 1px solid #ccc;
   }
   th.time {
     min-width: auto;
+    max-width: 30px;
   }
   
   thead {
@@ -125,6 +127,7 @@ table.lineup {
         $bgcolor: #5da9e3;
         @include border-radius(10px);
         @include text-shadow(0 1px 0 rgba(0,0,0,0.3));
+        position: relative;
         height: 20px;
         line-height: 20px;
         padding: 0 10px;
@@ -138,12 +141,21 @@ table.lineup {
           background: darken($bgcolor, 5%);
         }
         p {
-          @include inline-block;
           white-space: normal;
+          
           &.time {
+            position: absolute;
+            top: 0;
+            left: 7px;
             letter-spacing: -1px;
             font-weight: bold;
             margin-right: 5px;
+          }
+          &.title {
+            margin-left: 25px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
           }
         }
         
